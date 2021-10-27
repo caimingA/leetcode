@@ -1,34 +1,25 @@
 class Solution {
 public:
     int romanToInt(string s) {
+         map<char, int> temp = {
+            {'I' , 1},
+            {'V' , 5},
+            {'X' , 10},
+            {'L' , 50},
+            {'C' , 100},
+            {'D' , 500},
+            {'M' , 1000}
+        };
         int length = s.size();
-        int sum = 0;
+        int result = 0;
         for(int i = 0; i < length; i++){
-            if(s[i] == 'I' && (s[i + 1] == 'V' || s[i + 1] == 'X')){
-                sum -= 2;
-            }else if(s[i] == 'X' && (s[i + 1] == 'L' || s[i + 1] == 'C')){
-                sum -= 20;
-            }else if(s[i] == 'C' && (s[i + 1] == 'D' || s[i + 1] == 'M')){
-                sum -= 200;
-            }
-        }
-        for(int i = 0; i < length; i++){
-            if(s[i] == 'I'){
-                sum += 1;
-            }else if(s[i] == 'V'){
-                sum += 5;
-            }else if(s[i] == 'X'){
-                sum += 10;
-            }else if(s[i] == 'L'){
-                sum += 50;
-            }else if(s[i] == 'C'){
-                sum += 100;
-            }else if(s[i] == 'D'){
-                sum += 500;
+            if(temp[s[i]] < temp[s[i + 1]]){
+                result -= temp[s[i]];
             }else{
-                sum += 1000;
+                result += temp[s[i]];
             }
         }
-        return sum;
+        return result;
+    }
     }
 };
